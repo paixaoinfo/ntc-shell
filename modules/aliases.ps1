@@ -387,4 +387,4 @@ Set-Alias -Name n3 -Value monitor-menu -Scope Global -ErrorAction SilentlyContin
 Set-Alias -Name n4 -Value git-save-menu -Scope Global -ErrorAction SilentlyContinue
 Set-Alias -Name n5 -Value env-switcher-menu -Scope Global -ErrorAction SilentlyContinue
 Set-Alias -Name "??" -Value Invoke-NaturalLanguage -Scope Global -ErrorAction SilentlyContinue
-Set-Alias -Name "ai" -Value Invoke-NtcAgent -Scope Global -ErrorAction SilentlyContinue
+Set-Alias -Name "//" -Value Invoke-NtcAgent -Scope Global -ErrorAction SilentlyContinue
