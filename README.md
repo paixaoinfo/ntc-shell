@@ -1,123 +1,97 @@
-# 🚀 NTC Shell (Neves Terminal Command)
+# 🪐 NTC Shell v3.0: The AI-Native DevOps Cockpit
 
-> **Cockpit Agnóstico, AI-Native e de Alta Performance**
-> Desenvolvido por **Leandro Paixão** - [LinkedIn](https://linkedin.com/in/leandro-paixao-26b207308)
+An advanced, agnostic, and AI-Native Terminal User Interface (TUI) engineered to streamline multi-cloud orchestration, context switching, and autonomous code generation. Designed for elite DevOps Engineers and SaaS Architects who operate in high-tempo, multi-client international environments.
 
----
-
-## 📖 1. Introdução
-
-O **NTC Shell** não é apenas um terminal; é um verdadeiro cérebro de orquestração local. Projetado com uma estética minimalista *Apple-Style* (Zen), ele unifica o poder das Inteligências Artificiais modernas (Gemini, Anthropic, DeepSeek, xAI e Ollama Local) com uma Interface de Terminal (TUI) rica e fluida.
-
-O objetivo é centralizar operações DevOps, atalhos de rotina e integrações Multi-Cloud (sem sacrificar a velocidade), atuando também como um **Engenheiro de Software Autônomo** capaz de programar junto com você.
+Developed by **Leandro Paixão** (SaaS & Cloud Architect).
 
 ---
 
-## ⚙️ 2. Pré-requisitos
+## 🌌 The Philosophy: Why AI in the Terminal?
 
-Para que o NTC Shell alcance sua performance e visual máximos, seu ambiente precisará de:
+Traditional development setups treat the IDE as the center of gravity. However, for a SaaS Architect, the IDE is just the workshop (focused on writing text). The Terminal is the execution deck (focused on infrastructure, dockerization, local emulators, context sync, and deployment).
 
-- **PowerShell 7+** (Core)
-- **Windows Terminal**
-- **Oh My Posh** (Para o prompt decorativo)
-- **Fonte**: MesloLGS NF (Nerd Font para renderização de ícones)
-- **Python/Pip** (Obrigatório caso deseje usar o NTC Agent Automático)
+By marrying a high-performance console engine with local telemetry and an array of elite LLM APIs, NTC Shell eliminates context switching. It handles system diagnostics offline (ultra-fast, $0 token cost) and delegates cognitive tasks (debugging, architecture, agentic code writing) to the cloud only when triggered.
 
----
-
-## 🛠️ 3. Instalação do Zero (Guia de Sobrevivência)
-
-### Passo 3.1: Instalar Dependências (Nativo)
-
-**No Windows (via Winget):**
-```powershell
-winget install Microsoft.PowerShell
-winget install Microsoft.WindowsTerminal
-winget install JanDeDobbeleer.OhMyPosh -s winget
-```
-
-### Passo 3.2: Configurar o Diretório do NTC
-Clone ou mova a pasta base para o seu diretório local. Recomenda-se o caminho:
-`~\Documents\antigravity\TERMINAL`
-
-### Passo 3.3: Injetar o Orquestrador no `$PROFILE`
-Abra o seu perfil do PowerShell executando o comando abaixo e insira o código de inicialização:
-```powershell
-code $PROFILE
-```
-
-Insira no arquivo:
-```powershell
-# Importação do módulo de TUI
-if (-not (Get-Module -Name PwshSpectreConsole)) {
-    Import-Module PwshSpectreConsole -ErrorAction SilentlyContinue
-}
-
-$NtcDir = "$env:USERPROFILE\Documents\antigravity\TERMINAL"
-. "$NtcDir\modules\aliases.ps1"
-. "$NtcDir\modules\tui.ps1"
-
-Show-NtcDashboard
+```text
+                     ┌─────────────────────────────────────────┐
+                     │            LEANDRO'S COCKPIT            │
+                     └────────────────────┬────────────────────┘
+                                          │
+                  ┌───────────────────────┴───────────────────────┐
+                  ▼                                               ▼
+         [ NTC IDE PRO ]                                   [ NTC SHELL ]
+      Writing & Fine-Editing                          Orchestration & DevOps
+      (Cursor-like Side Chat)                         (?? and !! AI engines)
 ```
 
 ---
 
-## 🔑 4. Configuração Inicial e Radar de Chaves
+## ⚡ Core Architecture & Operational Gateways
 
-Antes de utilizar as integrações de IA, você precisará configurar suas chaves de API. O TUI do NTC Shell possui um **Radar Dinâmico de Conexão** no cabeçalho, que exibe um `✓ Online` caso a sua IA selecionada tenha uma chave válida instalada (ou se o servidor local Ollama estiver respirando).
+The system segregates quick natural language consultation from autonomous file-system modifications using a distinct Dual-Core AI Gateway:
 
-Execute o comando interativo:
-```powershell
-set-key gemini
-# Outras opções: anthropic, deepseek, xai, openai
-```
-Sua chave será salva de forma invisível nas variáveis de ambiente persistentes (`User`).
+### 1. Cognitive Consulting Gateway (`??`)
+An instant-response natural language interpreter. By passing unquoted arguments directly into the terminal, the gateway automatically packs system variables, formats raw prompts, and queries the active LLM via a secure, direct REST wrapper.
 
----
+- **Syntax:** `?? <your question here in natural language without quotes>`
+- **Result:** A fully rendered markdown panel showing the architectural explanation, system commands, or concept.
 
-## 🎯 5. Cockpit e Comandos de Operação (Cheat Sheet)
+### 2. Autonomous Agentic Engine (`!!`)
+A production-grade wrapper around elite command-line agent engines, natively integrated with PowerShell. It enables full-agentic cycles: reads directory maps, diagnoses bugs, proposes code updates, and automatically commits validated changes.
 
-Abaixo estão os atalhos unificados orquestrados pelo seu Dashboard:
-
-| Atalho | Comando Completo | O que faz? |
-| :---: | :--- | :--- |
-| **`n1`** | `projetos` | Navega e abre Workspaces no Antigravity IDE. |
-| **`n2`** | `switch-model` | Altera a IA de forma dinâmica. Ex: `n2 flash`, `n2 sonnet`, `n2 r1`, `n2 grok`, `n2 local`. O TUI se adapta à paleta de cores de cada marca. |
-| **`n3`** | `monitor` | Rastreamento unificado de Portas, Containers e Serviços. |
-| **`n4`** | `git-save` | Comita mudanças no Git com mensagens geradas automaticamente pela IA. |
-| **`n5`** | `env-switch` | Alterna os servidores e o contexto do sistema entre `staging` e `production`. |
+- **Syntax:** `!! "inspect database.js and write a connection pool to handle Redis failures"`
+- **Result:** Engages the autonomous agent to solve the task within your working directory.
 
 ---
 
-## 🤖 6. O Poder da IA no Terminal (?? e !!)
+## 🎨 Interactive High-Performance TUI
 
-O NTC Shell transforma seu terminal numa central de Engenharia DevOps utilizando as LLMs que você escolheu no `n2`.
+The cockpit uses `Spectre.Console` on top of PowerShell 7+ to render a sleek, real-time telemetry control board:
 
-### 🧠 Modo Consultor ChatGPT (`??`)
-Você não precisa sair do terminal para consultar a IA. Ele fará requisições de texto via REST diretamente para os motores da Google, Anthropic, xAI ou DeepSeek.
-Use o operador `??` sem aspas caso deseje conversar livremente.
-
-**Exemplos:**
-```powershell
-?? como listar portas abertas no linux
-?? me explique o padrão observer
-```
-*(Ele apenas fala, não edita arquivos. Ótimo para dúvidas rápidas e documentação).*
-
-### 🛠️ Modo Agente Engenheiro Autônomo (`!!` ou `Invoke-NtcAgent`)
-Esse é o superpoder de programação do NTC. Usando a engine do *Aider* por baixo dos panos, o NTC invoca um Agente Autônomo que **lê seus arquivos, refatora seu código e commita sozinho**.
-
-1. Na primeira execução, se você não tiver o motor instalado, o NTC Agent faz o bootstrapping baixando tudo pelo `pip` sozinho.
-2. Ele traduz dinamicamente a sua IA selecionada no painel (`n2 flash`) para a sintaxe do Agente (`gemini/gemini-2.5-flash`).
-
-**Exemplos:**
-```powershell
-!! conserte o erro no botão IR do arquivo script.js
-!! crie um componente de formulário de login no React
-```
-*(Se você digitar apenas `!!`, ele abrirá a sessão interativa do Aider já orquestrada para o seu modelo).*
+- **Active Brain Badge:** Displays the selected LLM (Gemini Pro, Claude Sonnet, DeepSeek R1, Grok, Ollama Local, etc.) and automatically adapts visual highlight themes based on the provider's brand identity.
+- **Active Cloud Project Sensor:** Auto-detects localized infrastructure states (e.g., Firebase active aliases, GCP active environments, Docker stacks).
+- **Deployment Guardrail (Color-Coded Alerts):** If the active cloud environment matches `PRODUCTION`, the cockpit header blinks in **Bold Red**, acting as a psychological firewall to prevent accidental deployment disasters. If `STAGING`, it highlights in yellow.
 
 ---
 
-> **Aviso de Customização da Marca**: 
-> Para alterar as credenciais ou títulos (Ex: `"Cockpit de Alta Performance"`), edite o arquivo `modules/tui.ps1`.
+## 🛠️ The 5-Step Operational Matrix (Numerical Shortcuts)
+
+The NTC Shell maps elite workflows to global numerical shortcuts (`n1` through `n5`) to maintain hands-on-keyboard speed:
+
+| Command | Alias | Function | Scope |
+| :--- | :--- | :--- | :--- |
+| `n1 [folder]` | `workon` | **Project Teleportation.** Enters directory, loads `.env`, launches NTC IDE PRO. | Local |
+| `n2 [model]` | `switch-model` | **AI Switcher.** Dynamically switches active cloud brains (10 specific modes available). | Cloud API |
+| `n3` | `sys-logs` / `monitor` | **Local Telemetry.** Checks active ports, emulator status, and container health. | Offline |
+| `n4 [msg]` | `git-save` | **Version Control.** Encapsulates add, commit, and push in a unified, safe pipeline. | DevOps |
+| `n5 [env]` | `switch-env` | **Env Switcher.** Switches cloud targets (Staging ↔ Production) and syncs contexts. | Cloud Infra |
+
+---
+
+## 🔒 Security & Cloud Guardrails
+
+When working with elite clients in international markets, security is non-negotiable. NTC Shell embeds local guardrails directly into the delivery pipeline:
+
+- **`env-check` (The Financial Firewall):** Integrated directly into `n4` (`git-save`). Before initiating Git delivery, the script checks if sensitive cloud files (e.g., `.env`, `service-account.json`, secret private keys) are exposed in the staging area. If any security risk is detected, the pipeline is blocked automatically, protecting client cloud billing accounts.
+- **`git-undo`:** A quick safety-valve to instantly revert the latest AI agent commits, soft-resetting HEAD without wiping local progress.
+
+---
+
+## 🧠 Brains Mapping (Multi-LLM Matrix)
+
+The cockpit handles dynamic transits across the primary AI providers, split by Routine/Cost-Effective work and Heavy/Reasoning workloads:
+
+| Provider | Routine / Speed Mode | Heavy / Reasoning Mode |
+| :--- | :--- | :--- |
+| **Google Cloud** | Gemini 2.5 Flash | Gemini 2.5 Pro |
+| **Anthropic** | Claude 3.5 Haiku | Claude 3.5 Sonnet |
+| **DeepSeek** | DeepSeek V3 (Chat) | DeepSeek R1 (Reasoner) |
+| **xAI** | Grok Build 0.1 | Grok 4.3 |
+| **Local (Offline)** | Ollama (Llama 3 - Default) | Ollama (DeepSeek R1 Local) |
+
+---
+
+<br>
+<div align="center">
+  <em>“The best way to predict the future is to build the tools that orchestrate it.”</em>
+</div>
