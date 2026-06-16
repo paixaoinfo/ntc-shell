@@ -1,5 +1,5 @@
 # === NTC SHELL FUNCTIONS ===
-function workon {
+function global:workon {
     param([string]$ProjectName)
     $projectsRoot = "$env:USERPROFILE\Documents\antigravity"
     $projectPath = Join-Path -Path $projectsRoot -ChildPath $ProjectName
@@ -26,7 +26,7 @@ function workon {
     }
 }
 
-function start-dev {
+function global:start-dev {
     $current = Get-Location
     $pkg = Join-Path $current "package.json"
     $req = Join-Path $current "requirements.txt"
@@ -72,7 +72,7 @@ function start-dev {
     }
 }
 
-function sys-logs {
+function global:sys-logs {
     $current = Get-Location
     $compose = Join-Path $current "docker-compose.yml"
     $firebaseDir = Join-Path $current ".firebase"
@@ -95,14 +95,14 @@ function sys-logs {
     }
 }
 
-function ai-debug {
+function global:ai-debug {
     $lines = (Get-History -Count 1 | Select-Object -ExpandProperty CommandLine)
     $output = "Comando executado:`n$lines`n`nErro/Não funcionou como esperado."
     $output | Set-Clipboard
     Write-Host "  Debug info copied to clipboard (paste in Claude/Gemini)" -ForegroundColor Green
 }
 
-function git-save {
+function global:git-save {
     param([string]$Message)
     $msg = if ($Message) { "update via AI: $Message" } else { "update via AI" }
     $projectRoot = & git rev-parse --show-toplevel 2>$null
@@ -129,12 +129,12 @@ function git-save {
     Write-Host "  Saved and pushed! ✓" -ForegroundColor Green
 }
 
-function git-undo {
+function global:git-undo {
     git reset --soft HEAD~1
     Write-Host "  Last commit undone (files preserved)" -ForegroundColor Yellow
 }
 
-function env-check {
+function global:env-check {
     $projectRoot = & git rev-parse --show-toplevel 2>$null
     if (-not $projectRoot) {
         Write-Host "  Not a git repository" -ForegroundColor Red
@@ -158,7 +158,7 @@ function env-check {
     }
 }
 
-function docker-nuke {
+function global:docker-nuke {
     Write-Host "  Stopping all containers..." -ForegroundColor Yellow
     docker stop $(docker ps -aq) 2>$null
     Write-Host "  Removing all containers..." -ForegroundColor Yellow
