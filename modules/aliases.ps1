@@ -286,28 +286,6 @@ function global:Invoke-NaturalLanguage {
     }
 }
 
-# --- FUNÇÃO DE NAVEGAÇÃO DE PROJETOS (WORKON) ---
-function global:workon {
-    param([string]$projectName)
-
-    if (-not $projectName) {
-        Write-Host "Utilização: workon [nome-do-projeto]" -ForegroundColor Yellow
-        return
-    }
-
-    $path = "$HOME\Documents\antigravity\$projectName"
-    if (Test-Path $path) {
-        Set-Location $path
-        # Inicializa o NTC IDE PRO na pasta do projeto com fallback seguro
-        if (Get-Command ntc-ide -ErrorAction SilentlyContinue) {
-            ntc-ide .
-        } else {
-            code .
-        }
-    } else {
-        Write-Host "Projeto '$projectName' não encontrado em Documents/antigravity/" -ForegroundColor Red
-    }
-}
 
 # Atalhos numéricos e navegação
 function global:projetos-menu { param([string]$p) if ($p) { workon $p } else { workon } }
