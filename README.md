@@ -83,10 +83,10 @@ The cockpit handles dynamic transits across the primary AI providers, split by R
 
 | Provider | Routine / Speed Mode | Heavy / Reasoning Mode |
 | :--- | :--- | :--- |
-| **Google Cloud** | Gemini 2.5 Flash | Gemini 2.5 Pro |
-| **Anthropic** | Claude 3.5 Haiku | Claude 3.5 Sonnet |
-| **DeepSeek** | DeepSeek V3 (Chat) | DeepSeek R1 (Reasoner) |
-| **xAI** | Grok Build 0.1 | Grok 4.3 |
+| **Google Cloud** | Gemini x.x Flash | Gemini x.x Pro |
+| **Anthropic** | Claude X.x Haiku | Claude x.x Sonnet |
+| **DeepSeek** | DeepSeek Vx (Chat) | DeepSeek Rx (Reasoner) |
+| **xAI** | Grok Build x.X | Grok X.x |
 | **Local (Offline)** | Ollama (Llama 3 - Default) | Ollama (DeepSeek R1 Local) |
 
 ---
