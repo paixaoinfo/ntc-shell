@@ -319,6 +319,27 @@ function global:env-switcher-menu { param([string]$e) if ($e) { switch-env $e } 
 function global:Invoke-NtcAgent {
     $query = $args -join " "
     
+    # 0. Prompt para transição para IDE
+    Write-Host ""
+    $choice = Read-Host "Para sua melhor produtividade iremos para o ambiente IDE, tudo bem? [Y/N]"
+    if ($choice -match '^[Yy]') {
+        if (Get-Command code -ErrorAction SilentlyContinue) {
+            Write-Host "Abrindo NTC IDE PRO... Repita o comando lá dentro para melhor visualização!" -ForegroundColor Green
+            if (Get-Command ntc-ide -ErrorAction SilentlyContinue) {
+                ntc-ide .
+            } else {
+                code .
+            }
+            return
+        } else {
+            Write-Host "`n[Aviso] VS Code não detectado no sistema." -ForegroundColor Red
+            Write-Host "Para a melhor experiência e produtividade, instale o VS Code:" -ForegroundColor Cyan
+            Write-Host "Download: https://code.visualstudio.com/`n" -ForegroundColor Yellow
+            Write-Host "Continuando no terminal atual..." -ForegroundColor Magenta
+            Start-Sleep -Seconds 2
+        }
+    }
+
     # 1. Verifica Instalação do Aider
     if (-not (Get-Command aider -ErrorAction SilentlyContinue)) {
         Write-Host "`n[NTC Agent] Instalando o motor de IA autônomo (Aider)..." -ForegroundColor Yellow
