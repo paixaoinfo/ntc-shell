@@ -289,7 +289,7 @@ function global:Invoke-NaturalLanguage {
 
 # Atalhos numéricos e navegação
 function global:projetos-menu { param([string]$p) if ($p) { workon $p } else { workon } }
-function global:monitor-menu { monitor }
+function global:monitor-menu { sys-logs }
 function global:git-save-menu { param([string]$m) if ($m) { git-save $m } else { git-save } }
 function global:env-switcher-menu { param([string]$e) if ($e) { switch-env $e } else { switch-env } }
 
