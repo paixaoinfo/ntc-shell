@@ -16,7 +16,10 @@ function global:workon {
             }
             Write-Host "  .env loaded" -ForegroundColor Green
         }
-        if (Get-Command code -ErrorAction SilentlyContinue) {
+        if (Get-Command ntc-ide -ErrorAction SilentlyContinue) {
+            ntc-ide $projectPath
+            Write-Host "  NTC IDE PRO opened" -ForegroundColor Cyan
+        } elseif (Get-Command code -ErrorAction SilentlyContinue) {
             code $projectPath
             Write-Host "  VS Code opened" -ForegroundColor Cyan
         }
