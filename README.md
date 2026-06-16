@@ -21,7 +21,7 @@ By marrying a high-performance console engine with local telemetry and an array 
                   ▼                                               ▼
          [ NTC IDE PRO ]                                   [ NTC SHELL ]
       Writing & Fine-Editing                          Orchestration & DevOps
-      (Cursor-like Side Chat)                         (?? and !! AI engines)
+      (Cursor-like Side Chat)                         (?? and // AI engines)
 ```
 
 ---
@@ -36,11 +36,11 @@ An instant-response natural language interpreter. By passing unquoted arguments 
 - **Syntax:** `?? <your question here in natural language without quotes>`
 - **Result:** A fully rendered markdown panel showing the architectural explanation, system commands, or concept.
 
-### 2. Autonomous Agentic Engine (`!!`)
-A production-grade wrapper around elite command-line agent engines, natively integrated with PowerShell. It enables full-agentic cycles: reads directory maps, diagnoses bugs, proposes code updates, and automatically commits validated changes.
+### 2. Autonomous Agentic Engine (`//`)
+A production-grade wrapper around elite command-line agent engines, natively integrated with PowerShell. It includes an intelligent transition prompt that intercepts the command to launch your isolated **NTC IDE PRO** workspace, ensuring maximum productivity before executing full-agentic cycles (reads directory maps, diagnoses bugs, proposes code updates).
 
-- **Syntax:** `!! "inspect database.js and write a connection pool to handle Redis failures"`
-- **Result:** Engages the autonomous agent to solve the task within your working directory.
+- **Syntax:** `// "inspect database.js and write a connection pool to handle Redis failures"`
+- **Result:** Prompts for NTC IDE PRO transition, then engages the autonomous agent to solve the task within your working directory.
 
 ---
 
