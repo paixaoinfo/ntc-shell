@@ -32,17 +32,28 @@ function global:workon {
             if ($localPath -and (Test-Path $localPath.Path)) {
                 $targetPath = $localPath.Path
             } else {
-                $projectsRoot = "$env:USERPROFILE\Documents\antigravity"
-                $fallbackPath = Join-Path -Path $projectsRoot -ChildPath $ProjectName
-                if (Test-Path $fallbackPath) {
-                    $targetPath = $fallbackPath
+                Write-Host "Procurando o projeto '$ProjectName' pelo seu PC (isso pode levar alguns segundos)..." -ForegroundColor Yellow
+                $searchPaths = @(
+                    "$env:USERPROFILE\Documents",
+                    "$env:USERPROFILE\Desktop",
+                    "$env:USERPROFILE\Downloads",
+                    "$env:USERPROFILE\source",
+                    "$env:USERPROFILE\projects"
+                )
+                
+                # Procura a pasta recursivamente (limite de profundidade 4 para não travar nos node_modules)
+                $found = Get-ChildItem -Path $searchPaths -Filter $ProjectName -Directory -Recurse -Depth 4 -ErrorAction SilentlyContinue | Select-Object -First 1
+                
+                if ($found) {
+                    $targetPath = $found.FullName
+                    Write-Host "Projeto encontrado em: $targetPath" -ForegroundColor Green
                 }
             }
         }
     }
 
     if (-not $targetPath) {
-        Write-Host "Erro: Projeto '$ProjectName' não encontrado localmente nem no Workspace Oficial." -ForegroundColor Red
+        Write-Host "Erro: Projeto '$ProjectName' não foi encontrado em lugar nenhum." -ForegroundColor Red
         return
     }
 
