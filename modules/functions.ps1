@@ -1,4 +1,21 @@
 # === NTC SHELL FUNCTIONS ===
+
+# Launcher do NTC IDE PRO
+function global:ntc-ide {
+    param([string]$folderPath = ".")
+    $codePath = Get-Command code -ErrorAction SilentlyContinue
+    if (-not $codePath) {
+        Write-Host "Erro: VS Code não encontrado no PATH do Windows." -ForegroundColor Red
+        return
+    }
+
+    $profileDir = "$HOME\Documents\ntc-ide-pro\IDE\profile-data"
+
+    # Executa o VS Code isolando as configurações no perfil do NTC IDE PRO
+    Start-Process "code" -ArgumentList "$folderPath --user-data-dir `"$profileDir`"" -NoNewWindow
+    Write-Host "Iniciando NTC IDE PRO..." -ForegroundColor Cyan
+}
+
 function global:workon {
     param([string]$ProjectName)
     $projectsRoot = "$env:USERPROFILE\Documents\antigravity"
