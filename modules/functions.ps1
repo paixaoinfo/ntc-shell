@@ -17,32 +17,54 @@ function global:ntc-ide {
 }
 
 function global:workon {
-    param([string]$ProjectName)
-    $projectsRoot = "$env:USERPROFILE\Documents\antigravity"
-    $projectPath = Join-Path -Path $projectsRoot -ChildPath $ProjectName
-    if (Test-Path $projectPath) {
-        Set-Location $projectPath
-        $envFile = Join-Path $projectPath ".env"
-        if (Test-Path $envFile) {
-            Get-Content $envFile | ForEach-Object {
-                if ($_ -match "^\s*([^#=]+)=(.*)") {
-                    $key = $matches[1].Trim()
-                    $value = $matches[2].Trim()
-                    [Environment]::SetEnvironmentVariable($key, $value, "Process")
+    param([string]$ProjectName = ".")
+
+    $targetPath = $null
+
+    if ($ProjectName -eq ".") {
+        $targetPath = (Get-Location).Path
+    } else {
+        $currentFolderName = (Get-Item .).Name
+        if ($currentFolderName.ToLower() -eq $ProjectName.ToLower()) {
+            $targetPath = (Get-Location).Path
+        } else {
+            $localPath = Resolve-Path $ProjectName -ErrorAction SilentlyContinue
+            if ($localPath -and (Test-Path $localPath.Path)) {
+                $targetPath = $localPath.Path
+            } else {
+                $projectsRoot = "$env:USERPROFILE\Documents\antigravity"
+                $fallbackPath = Join-Path -Path $projectsRoot -ChildPath $ProjectName
+                if (Test-Path $fallbackPath) {
+                    $targetPath = $fallbackPath
                 }
             }
-            Write-Host "  .env loaded" -ForegroundColor Green
         }
-        if (Get-Command ntc-ide -ErrorAction SilentlyContinue) {
-            ntc-ide $projectPath
-            Write-Host "  NTC IDE PRO opened" -ForegroundColor Cyan
-        } elseif (Get-Command code -ErrorAction SilentlyContinue) {
-            code $projectPath
-            Write-Host "  VS Code opened" -ForegroundColor Cyan
+    }
+
+    if (-not $targetPath) {
+        Write-Host "Erro: Projeto '$ProjectName' não encontrado localmente nem no Workspace Oficial." -ForegroundColor Red
+        return
+    }
+
+    Set-Location $targetPath
+    Write-Host "Ambiente ativado: $((Get-Item .).Name)" -ForegroundColor Green
+
+    $envFile = Join-Path $targetPath ".env"
+    if (Test-Path $envFile) {
+        Get-Content $envFile | ForEach-Object {
+            if ($_ -match "^\s*([^#=]+)=(.*)") {
+                $key = $matches[1].Trim()
+                $value = $matches[2].Trim()
+                [Environment]::SetEnvironmentVariable($key, $value, "Process")
+            }
         }
-        Write-Host "  Entered $ProjectName" -ForegroundColor Yellow
+        Write-Host "  .env loaded" -ForegroundColor Green
+    }
+    
+    if (Get-Command ntc-ide -ErrorAction SilentlyContinue) {
+        ntc-ide .
     } else {
-        Write-Host "  Project '$ProjectName' not found in $projectsRoot" -ForegroundColor Red
+        code .
     }
 }
 
