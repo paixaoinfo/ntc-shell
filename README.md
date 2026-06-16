@@ -1,10 +1,14 @@
 # 🪐 NTC Shell v3.0: The AI-Native DevOps Cockpit
 
+[🇧🇷 Leia em Português (PT-BR)](README.pt-BR.md)
+
 An advanced, agnostic, and AI-Native Terminal User Interface (TUI) engineered to streamline multi-cloud orchestration, context switching, and autonomous code generation. Designed for elite DevOps Engineers and SaaS Architects who operate in high-tempo, multi-client international environments.
 
 Developed by **Leandro Paixão** (SaaS & Cloud Architect).
 
 ---
+
+![NTC Shell Preview](preview.png)
 
 ## 🌌 The Philosophy: Why AI in the Terminal?
 
