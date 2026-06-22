@@ -320,12 +320,18 @@ function global:Invoke-NtcAgent {
 
     # 1. Verifica Instalação do Aider
     if (-not (Get-Command aider -ErrorAction SilentlyContinue)) {
+        # Check if it was installed by uv in ~/.local/bin
+        if (Test-Path "$HOME\.local\bin\aider.exe") {
+            $env:PATH += ";$HOME\.local\bin"
+        }
+    }
+    
+    if (-not (Get-Command aider -ErrorAction SilentlyContinue)) {
         Write-Host "`n[NTC Agent] Instalando o motor de IA autônomo (Aider)..." -ForegroundColor Yellow
         if (-not (Get-Command pip -ErrorAction SilentlyContinue)) {
-            Write-Host "ERRO: Python/Pip não encontrado! Instale o Python primeiro." -ForegroundColor Red
             return
         }
-        $pipCommand = "pip install aider-chat"
+        $pipCommand = "python -m uv tool install --python 3.12 aider-chat"
         Invoke-Expression $pipCommand
         if (-not (Get-Command aider -ErrorAction SilentlyContinue)) {
             Write-Host "ERRO: Falha ao instalar o Aider." -ForegroundColor Red
@@ -344,9 +350,11 @@ function global:Invoke-NtcAgent {
 
     # 3. Formata o modelo para a sintaxe do Aider
     $aiderModel = "$provider/$model"
-    # Ajuste para Ollama
+    # Ajuste para provedores específicos
     if ($provider -eq "ollama") {
         $aiderModel = "ollama_chat/$model"
+    } elseif ($provider -eq "google") {
+        $aiderModel = "gemini/$model"
     }
 
     # 4. Injeta e Roda o Piloto Automático
